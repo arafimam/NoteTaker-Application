@@ -31,6 +31,7 @@ All POST/ requests here.
 
 /* Post request from Home page.
 MailChimp Api Used here. 
+TODO: change activation key for mailchimp api.
 */
 app.post("/",function(request,response){
     /*
