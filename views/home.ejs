@@ -1,0 +1,79 @@
+<%- include('partials/header'); -%>
+
+<!---First feature-->
+<div class="row">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="bucket">
+            <img src="/images/shelf.jpg" class="logo1" alt="logo1">
+            <h1 class="topic1">Know your shortcuts and create organized notes.</h1>
+            <h4 class="desc1"><i>Our application will allows you to organize all your note in one place
+                and help you prepare for your exams.</i>
+            </h4>
+        </div>
+        
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <img src="/images/notes.jpg" class="image1" alt="image1">
+    </div>
+</div>
+
+<hr>
+
+<!--Second feature-->
+<div class="headBucket">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <img src="/images/practice-exams.png" class="image2" alt="image2">
+        </div>
+        
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <img src="/images/Aplus.jpg" class="logo2" alt="logo2">
+            <h1 class="topic2">Create your own questions and attempt quizzes.</h1> 
+            <h4 class="desc2"><i>Ace your exams by noting down important questions and practice them before exams.</i></h4>  
+        </div>
+
+        
+        
+    </div>
+</div>
+
+<hr>
+
+<!--Third feature-->
+<div class="row">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="bucket">
+            <img src="/images/time.png" class="logo3" alt="logo1">
+            <h1 class="topic3">Create. Plan. Organize and Stay on track</h1>
+            <h4 class="desc3"><i>Get daily reminders of things to do and create your own schedule</i>
+            </h4>
+        </div>
+        
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <img src="/images/lists.png" class="image3" alt="image3">
+    </div>
+</div>
+
+<!--Subscription model for Note taking tips-->
+<div class="subscription">
+    <h1>Subscribe to receive weekly note taking tips.</h1>
+    <div class="infoForm">
+        <form method="post" action="/" class="form">
+            <br><h4 class="emailText">Email Address</h4>
+            <input type="text" name="email" class="emailTextBox" placeholder="Email Address">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><br><br>
+            <h4 class="nameText">First Name</h4>
+            <input type="text" name="firstName" class="fullNameTextBox" placeholder="FirstName">
+            <h4 class="nameText">Last Name</h4>
+            <input type="text" name="lastName" class="fullNameTextBox" placeholder="Last Name">
+            <br><br>
+            <p class="subText"><%= subscription %></p><br>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+            
+
+        </form>
+    </div>
+
+   
+</div>
