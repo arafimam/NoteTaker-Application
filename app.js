@@ -21,6 +21,8 @@ var displayedName = " ";
 var displayedNumberOfNotes = 0;
 var displayedNumberOfThings = 0;
 var displayedAverageScore = 0;
+var errorMessageForLogin = "";
+var errorMessageForSignUp = "";
 
 
 /**
@@ -56,7 +58,7 @@ app.get("/Register",function(request,response){
     response.render("signup");
 });
 app.get("/login",function(request,response){
-    response.render("login");
+    response.render("login",{msg: errorMessageForLogin});
 });
 app.get("/dashboard",function(request,response){
     response.render("dashboard",{userEmail: displayedEmail, userName: displayedName,userNotes: displayedNumberOfNotes,userToDo: displayedNumberOfThings,userScore:displayedAverageScore});
@@ -86,7 +88,8 @@ app.post("/login",function(request,response){
             response.redirect("/dashboard");
         }else{
             // user entered email/ password that does not exist in db.
-            console.log("wrong password or email address!");
+            errorMessageForLogin = "Wrong Email or password. Try again!"
+            response.redirect("/login");
         }
 
     })
@@ -105,9 +108,11 @@ app.post("/Register",function(request,respose){
     const checkUser = clientData.countDocuments({Email: emailId},function(error,count){
         if (count>0){
              //user exist in Database.
-            respose.send("<h1>You are already registered.<h1>"); // render the following pages. --> Need to redirect to login page.
-        }
+             errorMessageForSignUp = "User already exist. Try a different email or try logging in."
+             respose.redirect("/Register");
+            }
         else{
+            // user getting stored in database with default values.
             const registeredUser = new clientData({
                 Email: emailId,
                 FullName: name,
@@ -116,8 +121,13 @@ app.post("/Register",function(request,respose){
                 Quiz: 0,
                 ToDo: 0
             })
+            displayedEmail = emailId;
+            displayedAverageScore = 0;
+            displayedNumberOfNotes = 0;
+            displayedNumberOfThings = 0;
+            displayedName = name;
             registeredUser.save();
-            respose.send("<h1>We are building the app!<h1>"); // render the following pages. --> Need to redirect to main app once implemented.
+            respose.redirect("/dashboard");
 
         }
     });
