@@ -1,0 +1,52 @@
+
+.logout{
+    text-align: right;
+
+}
+.logOut-btn{
+    margin-top: 5%;
+    margin-right: 20%;
+}
+.welcomeMessage{
+    margin-top: 5%;
+    margin-left: 20%;
+}
+.userLogo{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+.dashboard{
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 5%;
+}
+.info{
+    background-color: #D3D3D3;
+    border-radius: 8px;
+}
+.stats{
+    margin-top: 20%;
+    text-align: center;
+}
+
+.tap{
+    margin-top: 10%;
+    width: 60%;
+}
+
+h2{
+    font-size: 3rem;
+    display: inline-block;
+    width: 30%;
+    border-radius: 8px;
+    
+    background-color: #D3D3D3;
+}
+.header{
+    background-color:#90ee90 ;
+}
+.infos{
+    text-align: center;
+}
+

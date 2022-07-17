@@ -16,6 +16,11 @@ const https = require("https");
 /*All global variables defined here.*/
 const PORT = 3000;
 var message = "";
+var displayedEmail = " ";
+var displayedName = " ";
+var displayedNumberOfNotes = 0;
+var displayedNumberOfThings = 0;
+var displayedAverageScore = 0;
 
 
 /**
@@ -53,6 +58,9 @@ app.get("/Register",function(request,response){
 app.get("/login",function(request,response){
     response.render("login");
 });
+app.get("/dashboard",function(request,response){
+    response.render("dashboard",{userEmail: displayedEmail, userName: displayedName,userNotes: displayedNumberOfNotes,userToDo: displayedNumberOfThings,userScore:displayedAverageScore});
+})
 
 
 /*
@@ -70,8 +78,14 @@ app.post("/login",function(request,response){
         if (error){
             console.log(error);
         }if (docs){
-            console.log(docs)
+            // user is logged in --> redirect to user dashboard.
+            displayedEmail = emailId;
+            displayedName = docs.FullName;
+            displayedNumberOfNotes = docs.Notes;
+            displayedAverageScore = docs.Quiz;
+            response.redirect("/dashboard");
         }else{
+            // user entered email/ password that does not exist in db.
             console.log("wrong password or email address!");
         }
 
