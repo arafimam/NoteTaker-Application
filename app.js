@@ -23,6 +23,9 @@ app.get("/",function(request,response){
     response.render("home",{subscription:message});
 
 });
+app.get("/Register",function(request,response){
+    response.render("signup");
+})
 
 
 /*
