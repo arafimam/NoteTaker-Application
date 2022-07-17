@@ -16,10 +16,7 @@ const https = require("https");
 /*All global variables defined here.*/
 const PORT = 3000;
 var message = "";
-var NumberofNotes = 0;
-var QuizScore = 0;
-var thingsInToDo = 0;
-var errorMessage = ""
+
 
 /**
  *Initialize all Database here.
@@ -52,12 +49,35 @@ app.get("/",function(request,response){
 });
 app.get("/Register",function(request,response){
     response.render("signup");
-})
+});
+app.get("/login",function(request,response){
+    response.render("login");
+});
 
 
 /*
 All POST/ requests here.
 */
+/*
+Post request for client login.
+*/
+app.post("/login",function(request,response){
+    const emailId = request.body.email;
+    const pass = request.body.password;
+
+    // Finding user from database. 
+    clientData.findOne({"Email": emailId, "password": pass},function(error, docs){
+        if (error){
+            console.log(error);
+        }if (docs){
+            console.log(docs)
+        }else{
+            console.log("wrong password or email address!");
+        }
+
+    })
+
+})
 
 /*
 Post request for client signup.
@@ -78,9 +98,9 @@ app.post("/Register",function(request,respose){
                 Email: emailId,
                 FullName: name,
                 password: passId,
-                Notes: NumberofNotes,
-                Quiz: QuizScore,
-                ToDo: thingsInToDo
+                Notes: 0,
+                Quiz: 0,
+                ToDo: 0
             })
             registeredUser.save();
             respose.send("<h1>We are building the app!<h1>"); // render the following pages. --> Need to redirect to main app once implemented.
