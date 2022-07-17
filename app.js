@@ -2,6 +2,7 @@
 Require/ use all dependencies here.
 */
 const express = require("express");
+const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
@@ -15,6 +16,31 @@ const https = require("https");
 /*All global variables defined here.*/
 const PORT = 3000;
 var message = "";
+var NumberofNotes = 0;
+var QuizScore = 0;
+var thingsInToDo = 0;
+
+/**
+ *Initialize all Database here.
+*/
+mongoose.connect('mongodb://localhost:27017/clientData');
+
+/**
+* Initializae all Schemas here.
+*/
+const userSchema = new mongoose.Schema({
+    Email: String,
+    FullName: String,
+    password: String, 
+    Notes: Number, // This will store the number of Notes the user has made.
+    Quiz: Number, // This will store the average score the user has received in the quizzes
+    ToDo: Number  //This will store the number of things the user has in his toDo list
+});
+
+/*
+Initialize database models here.
+*/
+const clientData = mongoose.model("client",userSchema);
 
 /*
 All GET/ requests here.
@@ -31,6 +57,28 @@ app.get("/Register",function(request,response){
 /*
 All POST/ requests here.
 */
+
+/*
+Post request for client signup.
+*/
+app.post("/Register",function(request,respose){
+
+    const name = request.body.fullName;
+    const emailId = request.body.email;
+    const passId = request.body.password;
+    
+    // Storing user information in database.
+    const registeredUser = new clientData({
+        Email: emailId,
+        FullName: name,
+        password: passId,
+        Notes: NumberofNotes,
+        Quiz: QuizScore,
+        ToDo: thingsInToDo
+    })
+    registeredUser.save();
+    respose.send("<h1>We are building the app!<h1>");
+});
 
 /* Post request from Home page.
 MailChimp Api Used here. 

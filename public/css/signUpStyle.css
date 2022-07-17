@@ -14,7 +14,7 @@
  }
  .text{
 
-    width: 40%;
+    width: 70%;
     padding: 12px 20px;
     margin: 8px 0;
     border-radius: 8px;
@@ -23,7 +23,7 @@
  }
  input[type=text]:focus, input[type=password]:focus {
     border: 3px solid #555;
-    width: 50%;
+    width: 80%;
   }
  
   .holder{
