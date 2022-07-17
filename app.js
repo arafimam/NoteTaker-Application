@@ -19,6 +19,7 @@ var message = "";
 var NumberofNotes = 0;
 var QuizScore = 0;
 var thingsInToDo = 0;
+var errorMessage = ""
 
 /**
  *Initialize all Database here.
@@ -66,18 +67,29 @@ app.post("/Register",function(request,respose){
     const name = request.body.fullName;
     const emailId = request.body.email;
     const passId = request.body.password;
+
+    const checkUser = clientData.countDocuments({Email: emailId},function(error,count){
+        if (count>0){
+             //user exist in Database.
+            respose.send("<h1>You are already registered.<h1>"); // render the following pages. --> Need to redirect to login page.
+        }
+        else{
+            const registeredUser = new clientData({
+                Email: emailId,
+                FullName: name,
+                password: passId,
+                Notes: NumberofNotes,
+                Quiz: QuizScore,
+                ToDo: thingsInToDo
+            })
+            registeredUser.save();
+            respose.send("<h1>We are building the app!<h1>"); // render the following pages. --> Need to redirect to main app once implemented.
+
+        }
+    });
+   
     
-    // Storing user information in database.
-    const registeredUser = new clientData({
-        Email: emailId,
-        FullName: name,
-        password: passId,
-        Notes: NumberofNotes,
-        Quiz: QuizScore,
-        ToDo: thingsInToDo
-    })
-    registeredUser.save();
-    respose.send("<h1>We are building the app!<h1>");
+    
 });
 
 /* Post request from Home page.
